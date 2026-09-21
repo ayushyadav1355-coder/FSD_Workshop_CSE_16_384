@@ -44,6 +44,16 @@ const server=http.createServer((req,res)=>{
         }
         res.end(JSON.stringify(user));
     }
+   else if (url.startsWith("/delete/")&&method=="DELETE"){
+            const id= url.split("/")[2]
+            const index = userData.findIndex((u)=>u.id==id)
+            if(index==-1){
+                res.end("Data not found");
+            }
+            userData.splice(index,1)
+            res.end("data delete successfully")
+        }
+
 })
 server.listen(3000,()=>{
     console.log("Server is running on port number 3000");
